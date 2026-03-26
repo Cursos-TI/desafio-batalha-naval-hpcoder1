@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
@@ -9,6 +8,65 @@ int main() {
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+
+    int tabuleiro[10][10] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    };
+
+    int linhas[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    char colunas[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    int navioHorz[3] = {3,3,3};
+    int navioVert[3] = {3,3,3};
+
+    //posicionamento dos navios
+    //navio 1: vertical na linha 2, letras C, D e E
+    for(int i = 2; i <= 4; i++){
+        tabuleiro[1][i] = navioHorz[i-2];
+    }
+    //navio 2: vertical na coluna H, números 4, 5 e 6
+    for(int i = 3; i <= 5; i++){
+        tabuleiro[i][7] = navioVert[i-4];
+    }
+
+
+    printf("###TABULEIRO DE BATALHA NAVAL###\n");
+    
+    for(int i = 0; i <= 9; i++){
+        for(int j = 0; j <= 9; j++){
+            if(i == 0){
+                if(j == 0){
+                    printf("   ");
+                }
+                printf(" %c ", colunas[j]);
+                if(j == 9){
+                    printf("\n");
+                }
+            }
+        }
+        for(int k = 0; k <= 9; k++){
+            if(k == 0){
+                if(i != 9){
+                    printf("%d", i+1);
+                    printf("  ");
+                } else {
+                    printf("%d", i+1);
+                    printf(" ");
+                }
+            }
+            printf(" %d ", tabuleiro[i][k]);
+        }
+        printf("\n");
+    }
+
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.

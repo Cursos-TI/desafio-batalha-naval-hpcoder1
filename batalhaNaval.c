@@ -3,25 +3,23 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-// Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-// Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-// Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-// Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+// Nível Mestre - Habilidades Especiais com Matrizes
+// Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
+// Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
+// Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+
+#define LINHAS 10
+#define COLUNAS 10
 
 int main() {
 
-    int tabuleiro[10][10] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    };
+    int tabuleiro[LINHAS][COLUNAS];
+
+    for (int i = 0; i < LINHAS; i++){
+        for (int j = 0; j < COLUNAS; j++){
+            tabuleiro[i][j] = 0;
+        }
+    }
 
     int linhas[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     char colunas[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
@@ -30,6 +28,22 @@ int main() {
     int navioDiag1[3] = {3,3,3};
     int navioDiag2[3] = {3,3,3};
     int sobreposicao = 0;
+
+    int cone[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1}
+    };
+    int octaedro[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+    int cruz[3][5] = {
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 1, 0, 0}
+    };
 
     //posicionamento dos navios
     //navio 1: horizontal na linha 2, letras C, D e E
@@ -60,6 +74,39 @@ int main() {
             sobreposicao = 1;
         } else {
             tabuleiro[i][j] = navioDiag2[i-7];
+        }
+    }
+
+    //habilidade cone
+    for (int i = 0; i < 3; i++){
+        for (int j = 5; j < 10; j++){
+            if(tabuleiro[i][j] == 3 && cone[i][j-5] == 0){
+                tabuleiro[i][j] == 3;
+            } else {
+               tabuleiro[i][j] = cone[i][j-5]; 
+            }
+        }
+    }
+
+    //habilidade octaedro
+    for (int i = 1; i < 4; i++){
+        for (int j = 0; j < 5; j++){
+            if (tabuleiro[i][j] == 3 && octaedro[i-1][j] == 0){
+                tabuleiro[i][j] = 3;
+            } else {
+                tabuleiro[i][j] = octaedro[i-1][j];
+            }
+        }
+    }
+
+     //habilidade cruz
+    for (int i = 5; i < 8; i++){
+        for (int j = 3; j < 8; j++){
+            if (tabuleiro[i][j] == 3 && cruz[i-5][j-3] == 0){
+                tabuleiro[i][j] = 3;
+            } else {
+                tabuleiro[i][j] = cruz[i-5][j-3];
+            } 
         }
     }
 
@@ -104,10 +151,10 @@ int main() {
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
+    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
+    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
+    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
 
     // Exemplos de exibição das habilidades:
     // Exemplo para habilidade em cone:
